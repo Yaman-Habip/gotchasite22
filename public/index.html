@@ -10,9 +10,9 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body onload = ''>
+<body>
   <div>
-    <p id = "target" type = "text"></p>
+    <p id = "target" type = "text">placeholder </p>
     <input id = "last_words" type = "text" placeholder = "last words">
     <button id = "tag_out">
       Tag Out
@@ -50,12 +50,13 @@
 
   let tag_out = document.getElementById('tag_out');
   let target = document.getElementById('target');
-  let last_words = document.getElementById('last_words')
+  let uid = "yaman_habip23@milton.edu";
 
 //tag person out
 
   async function tag_out_func(){
-    var ref = doc(db, "data", "yaman_habip23@milton.edu");
+    let last_words = document.getElementById('last_words');
+    var ref = doc(db, "data", uid);
     const docRef = await updateDoc(
       ref, {
         alive: false,
@@ -72,7 +73,7 @@
         var chaser = docSnap.data()["chaser"];
         var chaser_ref = doc(db, "data", chaser);
         var target = docSnap.data()["target"];
-        var last_words = docSnap.data()["lastWords"];
+        var target_ref = doc(db, "data", target);
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -96,7 +97,42 @@
         }
       )
       .catch((error)=> {console.log(error)})
+
+//change target data
+  const target_docRef = await updateDoc(
+    target_ref, {
+      chaser: chaser,
+    }
+  )
+  .catch((error)=> {console.log(error)})
+
   }
+
+  async function set_target(){
+    var ref = doc(db, "data", uid);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+        var target = docSnap.data()["target"];
+        var target_ref = doc(db, "data", target);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+      const target_docSnap = await getDoc(target_ref);
+
+      if (target_docSnap.exists()) {
+          var first = target_docSnap.data()["firstName"] + " ";
+          var last = target_docSnap.data()["lastName"];
+
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
+
+    }
+
+    set_target();
 
   tag_out.addEventListener('click', tag_out_func)
 
