@@ -7,7 +7,7 @@
   <title>
     gotcha22
   </title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="/public/style.css" />
 </head>
 
 <body>
@@ -17,24 +17,6 @@
     <button id = "tag_out">
       Tag Out
     </button>
-    <h1>
-      Leader Board
-    </h1>
-  <table>
-    <thead>
-      <th>
-        Rank
-      </th>
-      <th>
-        Player
-      </th>
-      <th>
-        Tags
-      </th>
-    </thead>
-    <tbody id = "leaderboard">
-    </tbody>
-  </table>
   </div>
   <script type="module">
 
@@ -61,7 +43,7 @@
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-  import {getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField}
+  import {getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField}
   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
   const db = getFirestore();
@@ -150,54 +132,6 @@
 
     }
 
-    var rank = 0;
-    var tbody = document.getElementById("leaderboard");
-
-    function add_row(player, tags){
-      let tr = document.createElement("tr");
-      let td1 = document.createElement("td");
-      let td2 = document.createElement("td");
-      let td3 = document.createElement("td");
-
-      td1.innerHTML = ++rank;
-      td2.innerHTML = player;
-      td3.innerHTML = tags;
-
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-
-      tbody.appendChild(tr);
-
-    }
-
-    function add_rows(data){
-      rank = 0;
-      tbody.innerHTML = "";
-      data.forEach(element => {
-        add_row(element.firstName + " " + element.lastName, element.tags);
-      })
-    }
-
-    async function get_leaders(){
-      const querySnapshot = await getDocs(collection(db, "data"));
-
-      var leaders = [];
-
-      querySnapshot.forEach(doc => {
-        leaders.push({
-          firstName: doc.data()["firstName"],
-          lastName: doc.data()["lastName"],
-          tags: doc.data()["tags"]
-        })
-      });
-
-      leaders.sort(function(a, b){return b.tags - a.tags});
-      const leaders_sliced = leaders.slice(0, 10);
-      add_rows(leaders_sliced);
-    }
-
-    get_leaders();
     set_target();
 
   tag_out.addEventListener('click', tag_out_func)
