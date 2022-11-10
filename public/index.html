@@ -35,6 +35,13 @@
     <tbody id = "leaderboard">
     </tbody>
   </table>
+  <h1>
+    Last Words
+  </h1>
+  <table>
+    <tbody id = "last_words_table">
+    </tbody>
+  </table>
   </div>
   <script type="module">
 
@@ -92,6 +99,7 @@
         var chaser_ref = doc(db, "data", chaser);
         var target = docSnap.data()["target"];
         var target_ref = doc(db, "data", target);
+        var person_name = docSnap.data()["firstName"] + " " + docSnap.data()["lastName"];
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -124,6 +132,18 @@
   )
   .catch((error)=> {console.log(error)})
 
+//add stuff to last words collection
+
+  var lw_ref = collection(db, "lastWords");
+  const lw_docRef = await addDoc(
+    lw_ref, {
+      Lw: last_words.value,
+      Author: "--" + person_name,
+      TimeStamp: Date.now()
+    }
+  )
+  .catch((error)=> {console.log(error)})
+
   }
 
   async function set_target(){
@@ -151,9 +171,10 @@
     }
 
     var rank = 0;
-    var tbody = document.getElementById("leaderboard");
+    var tbody1 = document.getElementById("leaderboard");
 
-    function add_row(player, tags){
+
+    function add_row1(player, tags){
       let tr = document.createElement("tr");
       let td1 = document.createElement("td");
       let td2 = document.createElement("td");
@@ -167,15 +188,15 @@
       tr.appendChild(td2);
       tr.appendChild(td3);
 
-      tbody.appendChild(tr);
+      tbody1.appendChild(tr);
 
     }
 
-    function add_rows(data){
+    function add_rows1(data){
       rank = 0;
-      tbody.innerHTML = "";
+      tbody1.innerHTML = "";
       data.forEach(element => {
-        add_row(element.firstName + " " + element.lastName, element.tags);
+        add_row1(element.firstName + " " + element.lastName, element.tags);
       })
     }
 
@@ -194,9 +215,55 @@
 
       leaders.sort(function(a, b){return b.tags - a.tags});
       const leaders_sliced = leaders.slice(0, 10);
-      add_rows(leaders_sliced);
+      add_rows1(leaders_sliced);
     }
 
+    var tbody2 = document.getElementById("last_words_table");
+
+    function add_row2(Lw, Author){
+      let tr = document.createElement("tr");
+      let td1 = document.createElement("td");
+      let td2 = document.createElement("td");
+
+      td1.innerHTML = Lw;
+      td2.innerHTML = Author;
+
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+
+      tbody2.appendChild(tr);
+
+      console.log(tbody2);
+
+    }
+
+    function add_rows2(data){
+      tbody2.innerHTML = "";
+      data.forEach(element => {
+        add_row2(element.Lw, element.Author);
+      })
+    }
+
+    async function get_lws(){
+      const querySnapshot = await getDocs(collection(db, "lastWords"));
+
+      var lws = [];
+
+      querySnapshot.forEach(doc => {
+        lws.push({
+          Author: doc.data()["Author"],
+          Lw: doc.data()["Lw"],
+          TimeStamp: doc.data()["TimeStamp"]
+        })
+      });
+
+      lws.sort(function(a, b){return b.TimeStamp - a.TimeStamp});
+      // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
+      add_rows2(lws);
+    }
+
+    get_lws();
     get_leaders();
     set_target();
 
