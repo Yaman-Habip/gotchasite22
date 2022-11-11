@@ -27,36 +27,42 @@
 
     <div class="row">
       <div id="caseInfo-div" class="col-xs-6">
-        <h7>CASE INFO:</h7>
-        <p id="target" type="text" class="targ-txt">No  Target</p>
-        <p id="tags" type="text" class="tags-txt">CHASER: ◼️◼️◼️◼️◼️◼️◼️</p>
-        <p id="timeOfAttack" type="text" class="tags-txt">placeholder</p>
-        <p id="alive" type="text" class="tags-txt">TIME OF ATTACK: ◼️◼️◼️◼️◼️◼️◼️</p>
-        <p id="class" type="text" class="tags-txt">placeholder</p>
-        <p id="dayBoarder" type="text" class="tags-txt">placeholder</p>
+        <div id="info-txt">
+          <h5><u>INFO</u></h5>
+        </div>
+        <div id="info-details">
+          <p id="target" type="text" class="targ-txt">No Target</p>
+          <p id="tags" type="text" class="tags-txt"></p>
+          <p id="timeOfAttack" type="text" class="tags-txt">placeholder</p>
+          <p id="alive" type="text" class="tags-txt">TIME OF ATTACK: ◼️◼️◼️◼️◼️◼️◼️</p>
+          <p id="class" type="text" class="tags-txt">placeholder</p>
+          <p id="dayBoarder" type="text" class="tags-txt">placeholder</p>
+        </div>
       </div>
 
       <div id="tagout-div" class="col-xs-6 vstack gap-2">
-        <h4>TAG OUT</h4>
-        <input id="last_words" type="text" placeholder="last words">
+        <div id="info-txt">
+          <h5><u>TAG OUT</u></h5>
+        </div>
+        <div class="input-group mb-3">
+          <textarea id="last-words" type="text" placeholder="last words" rows="4"></textarea>
+        </div>
         <button id="tag_out" class="btn">
           Tag Out
         </button>
       </div>
-    </div>
-
-    <div class="row">
 
       <div id="lastwords-div" class="col-xs-6">
-        <h1>
-          Last Words
-        </h1>
+        <h5><u>LAST WORDS</u></h5>
         <table class="table">
           <tbody id="last_words_table">
           </tbody>
         </table>
       </div>
 
+    </div>
+
+    <div class="row">
     </div>
 
     <div id="leaderboard-div">
@@ -79,7 +85,6 @@
         </tbody>
       </table>
     </div>
-
   </div>
   <hr>
   <div>
@@ -246,107 +251,107 @@
          document.getElementById('last_words').hidden = true;
         }
 
-       }
+      }
 
-       var rank = 0;
-       var tbody1 = document.getElementById("leaderboard");
-
-
-       function add_row1(player, tags){
-         let tr = document.createElement("tr");
-         let td1 = document.createElement("td");
-         let td2 = document.createElement("td");
-         let td3 = document.createElement("td");
-
-         td1.innerHTML = ++rank;
-         td2.innerHTML = player;
-         td3.innerHTML = tags;
-
-         tr.appendChild(td1);
-         tr.appendChild(td2);
-         tr.appendChild(td3);
-
-         tbody1.appendChild(tr);
-
-       }
-
-       function add_rows1(data){
-         rank = 0;
-         tbody1.innerHTML = "";
-         data.forEach(element => {
-           add_row1(element.firstName + " " + element.lastName, element.tags);
-         })
-       }
-
-       async function get_leaders(){
-         const querySnapshot = await getDocs(collection(db, "data"));
-
-         var leaders = [];
-
-         querySnapshot.forEach(doc => {
-           leaders.push({
-             firstName: doc.data()["firstName"],
-             lastName: doc.data()["lastName"],
-             tags: doc.data()["tags"]
-           })
-         });
-
-         leaders.sort(function(a, b){return b.tags - a.tags});
-         const leaders_sliced = leaders.slice(0, 10);
-         add_rows1(leaders_sliced);
-       }
-
-       var tbody2 = document.getElementById("last_words_table");
-
-       function add_row2(Lw, Author){
-         let tr = document.createElement("tr");
-         let td1 = document.createElement("td");
-         let td2 = document.createElement("td");
-
-         td1.innerHTML = Lw;
-         td2.innerHTML = Author;
+      var rank = 0;
+      var tbody1 = document.getElementById("leaderboard");
 
 
-         tr.appendChild(td1);
-         tr.appendChild(td2);
+      function add_row1(player, tags) {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
 
-         tbody2.appendChild(tr);
+        td1.innerHTML = ++rank;
+        td2.innerHTML = player;
+        td3.innerHTML = tags;
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        tbody1.appendChild(tr);
+
+      }
+
+      function add_rows1(data) {
+        rank = 0;
+        tbody1.innerHTML = "";
+        data.forEach(element => {
+          add_row1(element.firstName + " " + element.lastName, element.tags);
+        })
+      }
+
+      async function get_leaders() {
+        const querySnapshot = await getDocs(collection(db, "data"));
+
+        var leaders = [];
+
+        querySnapshot.forEach(doc => {
+          leaders.push({
+            firstName: doc.data()["firstName"],
+            lastName: doc.data()["lastName"],
+            tags: doc.data()["tags"]
+          })
+        });
+
+        leaders.sort(function (a, b) { return b.tags - a.tags });
+        const leaders_sliced = leaders.slice(0, 10);
+        add_rows1(leaders_sliced);
+      }
+
+      var tbody2 = document.getElementById("last_words_table");
+
+      function add_row2(Lw, Author) {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+
+        td1.innerHTML = Lw;
+        td2.innerHTML = Author;
 
 
-       }
+        tr.appendChild(td1);
+        tr.appendChild(td2);
 
-       function add_rows2(data){
-         tbody2.innerHTML = "";
-         data.forEach(element => {
-           add_row2(element.Lw, element.Author);
-         })
-       }
-
-       async function get_lws(){
-         const querySnapshot = await getDocs(collection(db, "lastWords"));
-
-         var lws = [];
-
-         querySnapshot.forEach(doc => {
-           lws.push({
-             Author: doc.data()["Author"],
-             Lw: doc.data()["Lw"],
-             TimeStamp: doc.data()["TimeStamp"]
-           })
-         });
-
-         lws.sort(function(a, b){return b.TimeStamp - a.TimeStamp});
-         // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
-         add_rows2(lws);
-       }
+        tbody2.appendChild(tr);
 
 
-       get_lws();
-       get_leaders();
-       set_target();
+      }
 
-     tag_out.addEventListener('click', tag_out_func)
-  }
+      function add_rows2(data) {
+        tbody2.innerHTML = "";
+        data.forEach(element => {
+          add_row2(element.Lw, element.Author);
+        })
+      }
+
+      async function get_lws() {
+        const querySnapshot = await getDocs(collection(db, "lastWords"));
+
+        var lws = [];
+
+        querySnapshot.forEach(doc => {
+          lws.push({
+            Author: doc.data()["Author"],
+            Lw: doc.data()["Lw"],
+            TimeStamp: doc.data()["TimeStamp"]
+          })
+        });
+
+        lws.sort(function (a, b) { return b.TimeStamp - a.TimeStamp });
+        // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
+        add_rows2(lws);
+      }
+
+
+      get_lws();
+      get_leaders();
+      set_target();
+
+      tag_out.addEventListener('click', tag_out_func)
+    }
 
   </script>
 </body>
