@@ -84,7 +84,6 @@
   <script type="module">
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
 
   import {getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField}
   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
@@ -127,7 +126,6 @@
 
      // Initialize Firebase
      const app = initializeApp(firebaseConfig);
-     const analytics = getAnalytics(app);
 
 
      const db = getFirestore();
