@@ -36,14 +36,14 @@
         </div>
       </div>
 
-      <div id="tagout-div last_words" class="col-xs-6 vstack gap-2">
-        <div id="info-txt last_words">
-          <h5><u id = 'last_words'>TAG OUT</u></h5>
+      <div id="tagout-div hide" class="col-xs-6 vstack gap-2">
+        <div id="info-txt hide">
+          <h5><u id = 'hide'>TAG OUT</u></h5>
         </div>
         <div class="input-group mb-3">
-          <textarea id="last_words" type="text" placeholder="last words" rows="4"></textarea>
+          <textarea id="last_words hide" type="text" placeholder="last words" rows="4"></textarea>
         </div>
-        <button id="tag_out" class="btn">
+        <button id="tag_out hide" class="btn">
           Tag Out
         </button>
       </div>
@@ -243,7 +243,7 @@
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
          console.log('welcome')
        }else{
-         document.getElementById('tag_out').hidden = true;
+         document.getElementById('hide').hidden = true;
          document.getElementById('last_words').hidden = true;
         }
         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
