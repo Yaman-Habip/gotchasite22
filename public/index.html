@@ -90,7 +90,6 @@
   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
   window.onload = function () {
-    console.log('test')
     google.accounts.id.initialize({
       client_id: "628191290317-ed2ri1sigj31uhm7teol2gagamuqsgnk.apps.googleusercontent.com",
       callback: handleCredentialResponse
@@ -240,128 +239,6 @@
        var rank = 0;
        var tbody1 = document.getElementById("leaderboard");
 
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyDJcTBXZZcw1hpWAyith3HtPBZRAx7vkvE",
-      authDomain: "gotcha-b4b13.firebaseapp.com",
-      databaseURL: "https://gotcha-b4b13-default-rtdb.firebaseio.com",
-      projectId: "gotcha-b4b13",
-      storageBucket: "gotcha-b4b13.appspot.com",
-      messagingSenderId: "628191290317",
-      appId: "1:628191290317:web:630903a8d98f8cc19e9a84",
-      measurementId: "G-LG5MKGL41Y"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    import { getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField }
-      from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-
-    const db = getFirestore();
-
-    let tag_out = document.getElementById('tag_out');
-    let target = document.getElementById('target');
-    let uid = "yaman_habip23@milton.edu";
-
-    //tag person out
-
-    async function tag_out_func() {
-      let last_words = document.getElementById('last_words');
-      var ref = doc(db, "data", uid);
-      const docRef = await updateDoc(
-        ref, {
-        alive: false,
-        lastWords: last_words.value
-      }
-      )
-        .then(() => { alert("You have tagged out") })
-        .catch((error) => { console.log(error) })
-
-      //info about person tagging out
-
-      const docSnap = await getDoc(ref);
-      if (docSnap.exists()) {
-        var chaser = docSnap.data()["chaser"];
-        var chaser_ref = doc(db, "data", chaser);
-        var target = docSnap.data()["target"];
-        var target_ref = doc(db, "data", target);
-        var person_name = docSnap.data()["firstName"] + " " + docSnap.data()["lastName"];
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-
-      //info about chaser
-      const chaser_docSnap = await getDoc(chaser_ref);
-
-      if (chaser_docSnap.exists()) {
-        var tags = chaser_docSnap.data()["tags"] + 1;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-
-      //change chaser data
-      const chaser_docRef = await updateDoc(
-        chaser_ref, {
-        tags: tags,
-        target: target
-      }
-      )
-        .catch((error) => { console.log(error) })
-
-      //change target data
-      const target_docRef = await updateDoc(
-        target_ref, {
-        chaser: chaser,
-      }
-      )
-        .catch((error) => { console.log(error) })
-
-      //add stuff to last words collection
-
-      var lw_ref = collection(db, "lastWords");
-      const lw_docRef = await addDoc(
-        lw_ref, {
-        Lw: last_words.value,
-        Author: "--" + person_name,
-        TimeStamp: Date.now()
-      }
-      )
-        .catch((error) => { console.log(error) })
-
-    }
-
-    async function set_target() {
-      var ref = doc(db, "data", uid);
-      const docSnap = await getDoc(ref);
-      if (docSnap.exists()) {
-        var target = docSnap.data()["target"];
-        var target_ref = doc(db, "data", target);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-      const target_docSnap = await getDoc(target_ref);
-
-      if (target_docSnap.exists()) {
-        var first = target_docSnap.data()["firstName"] + " ";
-        var last = target_docSnap.data()["lastName"];
-
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-      document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
 
        function add_row1(player, tags){
          let tr = document.createElement("tr");
@@ -378,11 +255,6 @@
          tr.appendChild(td3);
 
          tbody1.appendChild(tr);
-    function add_row1(player, tags) {
-      let tr = document.createElement("tr");
-      let td1 = document.createElement("td");
-      let td2 = document.createElement("td");
-      let td3 = document.createElement("td");
 
        }
 
@@ -411,16 +283,6 @@
          const leaders_sliced = leaders.slice(0, 10);
          add_rows1(leaders_sliced);
        }
-    function add_rows1(data) {
-      rank = 0;
-      tbody1.innerHTML = "";
-      data.forEach(element => {
-        add_row1(element.firstName + " " + element.lastName, element.tags);
-      })
-    }
-
-    async function get_leaders() {
-      const querySnapshot = await getDocs(collection(db, "data"));
 
        var tbody2 = document.getElementById("last_words_table");
 
@@ -431,16 +293,10 @@
 
          td1.innerHTML = Lw;
          td2.innerHTML = Author;
-      leaders.sort(function (a, b) { return b.tags - a.tags });
-      const leaders_sliced = leaders.slice(0, 10);
-      add_rows1(leaders_sliced);
-    }
+
+
          tr.appendChild(td1);
          tr.appendChild(td2);
-    function add_row2(Lw, Author) {
-      let tr = document.createElement("tr");
-      let td1 = document.createElement("td");
-      let td2 = document.createElement("td");
 
          tbody2.appendChild(tr);
 
@@ -471,15 +327,6 @@
          // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
          add_rows2(lws);
        }
-    function add_rows2(data) {
-      tbody2.innerHTML = "";
-      data.forEach(element => {
-        add_row2(element.Lw, element.Author);
-      })
-    }
-
-    async function get_lws() {
-      const querySnapshot = await getDocs(collection(db, "lastWords"));
 
 
        get_lws();
@@ -488,12 +335,7 @@
 
      tag_out.addEventListener('click', tag_out_func)
   }
-      lws.sort(function (a, b) { return b.TimeStamp - a.TimeStamp });
-      // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
-      add_rows2(lws);
-    }
-    tag_out.addEventListener('click', tag_out_func)
-
+  
   </script>
 </body>
 
