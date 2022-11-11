@@ -42,7 +42,7 @@
 
       <div id="tagout-div" class="col-xs-6 vstack gap-2">
         <div id="info-txt">
-          <h5 id = 'welcome'><u>TAG OUT</u></h5>
+          <h5><u>TAG OUT</u></h5>
         </div>
         <div class="input-group mb-3">
           <textarea id="last_words" type="text" placeholder="last words" rows="4"></textarea>
@@ -245,11 +245,12 @@
              console.log("No such document!");
            }
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
-         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
+         console.log('welcome')
        }else{
          document.getElementById('tag_out').hidden = true;
          document.getElementById('last_words').hidden = true;
         }
+        document.getElementById('welcome').innerHTML = "Welcome " + person_name;
 
       }
 
