@@ -54,7 +54,7 @@ body{
   padding: 2%;
   padding-top: 3%;
   width: auto;
-  height: auto;
+  max-height: 45%;
 }
 
 #last_words{
