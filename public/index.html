@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 
@@ -237,11 +238,14 @@
              console.log("No such document!");
            }
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
-         console.log('welcome')
        }else{
-         document.getElementById('hide2').hidden = true;
-         document.getElementById('hide4').hidden = true;
-         document.getElementById('last_words').hidden = true;
+         // add hidden here
+         $("#hide2").hide();
+         $("#hide4").hide();
+         $("#last_words").hide();
+         document.getElementById('hide2').style.display = 'none';
+         document.getElementById('hide4').style.display = 'none';
+         document.getElementById('last_words').style.display = 'none';
         }
         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
 
