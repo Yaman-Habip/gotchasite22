@@ -196,6 +196,7 @@
            }
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
        }else{
+         console.log('test')
          document.getElementById('tag_out').hidden = true;
          document.getElementById('last_words').hidden = true;
         }
@@ -297,7 +298,7 @@
 
        get_lws();
        get_leaders();
-       // set_target();
+       set_target();
 
      tag_out.addEventListener('click', tag_out_func)
   }
