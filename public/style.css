@@ -1,22 +1,16 @@
 body{
   /* background-image: url("images/redacted.jpg"); */
-  background-color: rgb(241, 210, 168);
+  background-color: rgb(36, 36, 36);
   /* margin-left: 50%; */
 }
 
-.center{
-  border: 5px solid #FFFF00;
-  text-align: center;
-  justify-content: center;
-}
-
 .main-div{
-  border: 5px solid #FFFF00;
   margin-left: auto;
   margin-right: auto;
+  color: lightgrey;
 }
 
-#last_words{
+.input-group{
   width: auto;
   height: 60%;
 }
@@ -25,47 +19,48 @@ body{
 
 }
 
-#tag_out{
-  /* border:none; */
-  /* margin-top: 6%; */
-}
-
-#target{
-  /* margin-top: 10%; */
+#info-txt{
+  text-align: center;
 }
 
 #caseInfo-div{
   border-radius: 25px;
-  background:tan;
-  padding: 20px;
-  width: 35%;
+  background: rgb(59, 59, 59);
+  padding: 2%;
+  padding-top: 3%;
+  width: auto;
   height: auto;
-}
-
-#caseInfo-div{
   margin-right: 5%;
 }
 
 #tagout-div{
   border-radius: 25px;
-  background:tan;
-  padding: 20px;
-  margin-top: 4%;
+  background:rgb(59, 59, 59);
+  padding: 2%;
+  padding-top: 3%;
   width: auto;
   height: auto;
+  margin-right: 5%;
 }
 
 #lastwords-div{
   border-radius: 25px;
-  background:tan;
-  padding: 20px;
-  margin-top: 4%;
+  background:rgb(59, 59, 59);
+  padding: 2%;
+  padding-top: 3%;
   width: auto;
   height: auto;
-  /* margin-left: 40%; */
 }
 
+#last-words{
+  text-align: center;
+  inline-size: 100%;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+
 .btn{
-  background-color: rgb(146, 122, 90);
+  background-color: rgb(77, 77, 77);
 }
 
