@@ -177,11 +177,14 @@
        if (docSnap.exists()) {
            var target = docSnap.data()["target"];
            var target_ref = doc(db, "data", target);
+           var alive = docSnap.data()["alive"];
          } else {
            // doc.data() will be undefined in this case
            console.log("No such document!");
          }
          const target_docSnap = await getDoc(target_ref);
+
+         if (alive == true){
 
          if (target_docSnap.exists()) {
              var first = target_docSnap.data()["firstName"] + " ";
@@ -192,6 +195,10 @@
              console.log("No such document!");
            }
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
+       }else{
+         document.getElementById('tag_out').hidden = true;
+         document.getElementById('last_words').hidden = true;
+        }
 
        }
 
@@ -287,9 +294,10 @@
          add_rows2(lws);
        }
 
+
        get_lws();
        get_leaders();
-       set_target();
+       // set_target();
 
      tag_out.addEventListener('click', tag_out_func)
   }
