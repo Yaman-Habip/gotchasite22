@@ -218,6 +218,7 @@
            var target = docSnap.data()["target"];
            var target_ref = doc(db, "data", target);
            var alive = docSnap.data()["alive"];
+           var person_name = docSnap.data()["firstName"];
          } else {
            // doc.data() will be undefined in this case
            console.log("No such document!");
@@ -235,7 +236,7 @@
              console.log("No such document!");
            }
          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
-         document.getElementById('welcome').innerHTML = "Welcome" + first;
+         document.getElementById('welcome').innerHTML = "Welcome" + person_name;
        }else{
          document.getElementById('tag_out').hidden = true;
          document.getElementById('last_words').hidden = true;
