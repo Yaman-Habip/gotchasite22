@@ -157,6 +157,9 @@
        .then(()=> {alert("You have tagged out")})
        .catch((error)=> {console.log(error)})
 
+       document.getElementById('tag_out').hidden = true;
+       document.getElementById('last_words').hidden = true;
+
      //info about person tagging out
 
        const docSnap = await getDoc(ref);
