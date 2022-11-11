@@ -24,11 +24,11 @@ body{
   justify-content: center;
 }
 
-#info-txt{
+.info-txt{
   text-align: center;
 }
 
-#caseInfo-div{
+.caseInfo-div{
   border-radius: 25px;
   background: rgb(59, 59, 59);
   padding: 2%;
@@ -38,7 +38,7 @@ body{
   margin-right: 5%;
 }
 
-#tagout-div{
+.tagout-div{
   border-radius: 25px;
   background:rgb(59, 59, 59);
   padding: 2%;
@@ -48,8 +48,9 @@ body{
   margin-right: 5%;
 }
 
-#lastwords-div{
+.lastwords-div{
   border-radius: 25px;
+  color: lightgrey;
   background:rgb(59, 59, 59);
   padding: 2%;
   padding-top: 3%;
@@ -57,7 +58,7 @@ body{
   max-height: 45%;
 }
 
-#last_words{
+.last_words{
   text-align: center;
   inline-size: 100%;
   overflow-wrap: break-word;
