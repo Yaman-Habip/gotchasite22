@@ -172,6 +172,7 @@
      }
 
      async function set_target(){
+       console.log('test')
        var ref = doc(db, "data", uid);
        const docSnap = await getDoc(ref);
        if (docSnap.exists()) {
@@ -196,7 +197,6 @@
            }
          // document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
        }else{
-         console.log('test')
          document.getElementById('tag_out').hidden = true;
          document.getElementById('last_words').hidden = true;
         }
