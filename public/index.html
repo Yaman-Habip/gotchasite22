@@ -15,41 +15,71 @@
 </head>
 
 <body>
-<<<<<<< Updated upstream
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <div id="buttonDiv"></div>
-  <div>
-      <div id="buttonDiv"></div>
-    <p id = "target" type = "text">No Target</p>
-    <input id = "last_words" type = "text" placeholder = "last words">
-    <button id = "tag_out">
-      Tag Out
-    </button>
-    <h1>
-      Leader Board
-    </h1>
-  <table>
-    <thead>
-      <th>
-        Rank
-      </th>
-      <th>
-        Player
-      </th>
-      <th>
-        Tags
-      </th>
-    </thead>
-    <tbody id = "leaderboard">
-    </tbody>
-  </table>
-  <h1>
-    Last Words
-  </h1>
-  <table>
-    <tbody id = "last_words_table">
-    </tbody>
-  </table>
+  <div class="container-fluid main-div">
+
+    <div id="redacted-div">
+      <h5>THIS DOCUMENT HAS BEEN REDACTED</title>
+        <hr />
+    </div>
+
+    <h3>WELCOME BLAKE</h3>
+
+    <div class="row">
+      <div id="caseInfo-div" class="col-xs-6">
+        <h7>CASE INFO:</h7>
+        <p id="target" type="text" class="targ-txt">placeholder </p>
+        <p id="tags" type="text" class="tags-txt">CHASER: ◼️◼️◼️◼️◼️◼️◼️</p>
+        <p id="timeOfAttack" type="text" class="tags-txt">placeholder</p>
+        <p id="alive" type="text" class="tags-txt">TIME OF ATTACK: ◼️◼️◼️◼️◼️◼️◼️</p>
+        <p id="class" type="text" class="tags-txt">placeholder</p>
+        <p id="dayBoarder" type="text" class="tags-txt">placeholder</p>
+      </div>
+
+      <div id="tagout-div" class="col-xs-6 vstack gap-2">
+        <h4>TAG OUT</h4>
+        <input id="last_words" type="text" placeholder="last words">
+        <button id="tag_out" class="btn">
+          Tag Out
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div id="lastwords-div" class="col-xs-6">
+        <h1>
+          Last Words
+        </h1>
+        <table class="table">
+          <tbody id="last_words_table">
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div id="leaderboard-div">
+      <h1>
+        Leader Board
+      </h1>
+      <table class="table leaderboaord">
+        <thead>
+          <th>
+            Rank
+          </th>
+          <th>
+            Player
+          </th>
+          <th>
+            Tags
+          </th>
+        </thead>
+        <tbody id="leaderboard">
+        </tbody>
+      </table>
+    </div>
+
   </div>
   <script type="module">
 
@@ -60,6 +90,7 @@
   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
   window.onload = function () {
+    console.log('test')
     google.accounts.id.initialize({
       client_id: "628191290317-ed2ri1sigj31uhm7teol2gagamuqsgnk.apps.googleusercontent.com",
       callback: handleCredentialResponse
@@ -209,74 +240,6 @@
        var rank = 0;
        var tbody1 = document.getElementById("leaderboard");
 
-=======
-  <div class="container-fluid main-div">
-
-    <div id="redacted-div">
-      <h5>THIS DOCUMENT HAS BEEN REDACTED</title>
-        <hr />
-    </div>
-
-    <h3>WELCOME BLAKE</h3>
-
-    <div class="row">
-      <div id="caseInfo-div" class="col-xs-6">
-        <h7>CASE INFO:</h7>
-        <p id="target" type="text" class="targ-txt">placeholder </p>
-        <p id="tags" type="text" class="tags-txt">CHASER: ◼️◼️◼️◼️◼️◼️◼️</p>
-        <p id="timeOfAttack" type="text" class="tags-txt">placeholder</p>
-        <p id="alive" type="text" class="tags-txt">TIME OF ATTACK: ◼️◼️◼️◼️◼️◼️◼️</p>
-        <p id="class" type="text" class="tags-txt">placeholder</p>
-        <p id="dayBoarder" type="text" class="tags-txt">placeholder</p>
-      </div>
-
-      <div id="tagout-div" class="col-xs-6 vstack gap-2">
-        <h4>TAG OUT</h4>
-        <input id="last_words" type="text" placeholder="last words">
-        <button id="tag_out" class="btn">
-          Tag Out
-        </button>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div id="lastwords-div" class="col-xs-6">
-        <h1>
-          Last Words
-        </h1>
-        <table class="table">
-          <tbody id="last_words_table">
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-    <div id="leaderboard-div">
-      <h1>
-        Leader Board
-      </h1>
-      <table class="table leaderboaord">
-        <thead>
-          <th>
-            Rank
-          </th>
-          <th>
-            Player
-          </th>
-          <th>
-            Tags
-          </th>
-        </thead>
-        <tbody id="leaderboard">
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-  <script type="module">
-
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
@@ -399,7 +362,6 @@
         console.log("No such document!");
       }
       document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
->>>>>>> Stashed changes
 
        function add_row1(player, tags){
          let tr = document.createElement("tr");
@@ -415,15 +377,12 @@
          tr.appendChild(td2);
          tr.appendChild(td3);
 
-<<<<<<< Updated upstream
          tbody1.appendChild(tr);
-=======
     function add_row1(player, tags) {
       let tr = document.createElement("tr");
       let td1 = document.createElement("td");
       let td2 = document.createElement("td");
       let td3 = document.createElement("td");
->>>>>>> Stashed changes
 
        }
 
@@ -440,7 +399,6 @@
 
          var leaders = [];
 
-<<<<<<< Updated upstream
          querySnapshot.forEach(doc => {
            leaders.push({
              firstName: doc.data()["firstName"],
@@ -453,7 +411,6 @@
          const leaders_sliced = leaders.slice(0, 10);
          add_rows1(leaders_sliced);
        }
-=======
     function add_rows1(data) {
       rank = 0;
       tbody1.innerHTML = "";
@@ -464,7 +421,6 @@
 
     async function get_leaders() {
       const querySnapshot = await getDocs(collection(db, "data"));
->>>>>>> Stashed changes
 
        var tbody2 = document.getElementById("last_words_table");
 
@@ -473,26 +429,18 @@
          let td1 = document.createElement("td");
          let td2 = document.createElement("td");
 
-<<<<<<< Updated upstream
          td1.innerHTML = Lw;
          td2.innerHTML = Author;
-=======
       leaders.sort(function (a, b) { return b.tags - a.tags });
       const leaders_sliced = leaders.slice(0, 10);
       add_rows1(leaders_sliced);
     }
->>>>>>> Stashed changes
-
-
-<<<<<<< Updated upstream
          tr.appendChild(td1);
          tr.appendChild(td2);
-=======
     function add_row2(Lw, Author) {
       let tr = document.createElement("tr");
       let td1 = document.createElement("td");
       let td2 = document.createElement("td");
->>>>>>> Stashed changes
 
          tbody2.appendChild(tr);
 
@@ -511,7 +459,6 @@
 
          var lws = [];
 
-<<<<<<< Updated upstream
          querySnapshot.forEach(doc => {
            lws.push({
              Author: doc.data()["Author"],
@@ -524,7 +471,6 @@
          // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
          add_rows2(lws);
        }
-=======
     function add_rows2(data) {
       tbody2.innerHTML = "";
       data.forEach(element => {
@@ -534,28 +480,19 @@
 
     async function get_lws() {
       const querySnapshot = await getDocs(collection(db, "lastWords"));
->>>>>>> Stashed changes
 
 
        get_lws();
        get_leaders();
        set_target();
 
-<<<<<<< Updated upstream
      tag_out.addEventListener('click', tag_out_func)
   }
-=======
       lws.sort(function (a, b) { return b.TimeStamp - a.TimeStamp });
       // const lws_sliced = lws.slice(0, 10); optional if we want to limit number of last words
       add_rows2(lws);
     }
->>>>>>> Stashed changes
-
-
-<<<<<<< Updated upstream
-=======
     tag_out.addEventListener('click', tag_out_func)
->>>>>>> Stashed changes
 
   </script>
 </body>
