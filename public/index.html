@@ -37,17 +37,16 @@
       </div>
 
       <div id="tagout-div hide" class="col-xs-6 vstack gap-2">
-        <div id="info-txt hide">
-          <h5><u id = 'hide'>TAG OUT</u></h5>
+        <div id="info-txt hide1">
+          <h5><u id = 'hide2'>TAG OUT</u></h5>
         </div>
-        <div class="input-group mb-3">
-          <textarea id="last_words hide" type="text" placeholder="last words" rows="4"></textarea>
+        <div class="input-group mb-3 hide3">
+          <textarea id="last_words" type="text" placeholder="last words" rows="4"></textarea>
         </div>
-        <button id="tag_out hide" class="btn">
+        <button id="tag_out hide4" class="btn">
           Tag Out
         </button>
       </div>
-
       <div id="lastwords-div" class="col-xs-6">
         <h5><u>LAST WORDS</u></h5>
         <table class="table">
@@ -158,9 +157,6 @@
        .then(()=> {alert("You have tagged out")})
        .catch((error)=> {console.log(error)})
 
-       document.getElementById('tag_out').hidden = true;
-       document.getElementById('last_words').hidden = true;
-
      //info about person tagging out
 
        const docSnap = await getDoc(ref);
@@ -244,6 +240,10 @@
          console.log('welcome')
        }else{
          document.getElementById('hide').hidden = true;
+         document.getElementById('hide1').hidden = true;
+         document.getElementById('hide2').hidden = true;
+         document.getElementById('hide3').hidden = true;
+         document.getElementById('hide4').hidden = true;
          document.getElementById('last_words').hidden = true;
         }
         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
