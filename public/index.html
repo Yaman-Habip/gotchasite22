@@ -23,8 +23,8 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-6 caseInfo-div">
-        <div class="info-txt">
+      <div id="caseInfo-div" class="col-xs-6">
+        <div id="info-txt">
           <h5><u>INFO</u></h5>
         </div>
         <div id="info-details">
@@ -37,22 +37,19 @@
         </div>
       </div>
 
-      <div class="col-xs-6 vstack gap-2 tagout-div">
-        <div class="info-txt">
-          <h5><u id='hide2'>TAG OUT</u></h5>
+      <div id="tagout-div" class="col-xs-6 vstack gap-2">
+        <div id="info-txt">
+          <h5><u id = 'hide2'>TAG OUT</u></h5>
         </div>
         <div class="input-group mb-3">
-          <textarea class="last_words" type="text" placeholder="last words" rows="4" maxlength="100"></textarea>
+          <textarea id="last_words" type="text" placeholder="last words" rows="4"></textarea>
         </div>
         <button id="tag_out" class="btn">
           Tag Out
         </button>
       </div>
-
-      <div class="col-xs-6 lastwords-div">
-        <div class="info-txt">
-          <h5><u>LAST WORDS</u></h5>
-        </div>
+      <div id="lastwords-div" class="col-xs-6">
+        <h5><u>LAST WORDS</u></h5>
         <table class="table">
           <tbody id="last_words_table">
           </tbody>
@@ -118,134 +115,144 @@
       var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
+    }).join(''));
 
-      return JSON.parse(jsonPayload);
-    }
+    return JSON.parse(jsonPayload);
+}
 
-    function handleCredentialResponse(response) {
-      const responsePayload = parseJwt(response.credential);
+  function handleCredentialResponse(response) {
+     const responsePayload = parseJwt(response.credential);
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyDJcTBXZZcw1hpWAyith3HtPBZRAx7vkvE",
-        authDomain: "gotcha-b4b13.firebaseapp.com",
-        databaseURL: "https://gotcha-b4b13-default-rtdb.firebaseio.com",
-        projectId: "gotcha-b4b13",
-        storageBucket: "gotcha-b4b13.appspot.com",
-        messagingSenderId: "628191290317",
-        appId: "1:628191290317:web:630903a8d98f8cc19e9a84",
-        measurementId: "G-LG5MKGL41Y"
-      };
+     const firebaseConfig = {
+       apiKey: "AIzaSyDJcTBXZZcw1hpWAyith3HtPBZRAx7vkvE",
+       authDomain: "gotcha-b4b13.firebaseapp.com",
+       databaseURL: "https://gotcha-b4b13-default-rtdb.firebaseio.com",
+       projectId: "gotcha-b4b13",
+       storageBucket: "gotcha-b4b13.appspot.com",
+       messagingSenderId: "628191290317",
+       appId: "1:628191290317:web:630903a8d98f8cc19e9a84",
+       measurementId: "G-LG5MKGL41Y"
+     };
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
+     // Initialize Firebase
+     const app = initializeApp(firebaseConfig);
 
 
-      const db = getFirestore();
+     const db = getFirestore();
 
-      let tag_out = document.getElementById('tag_out');
-      let target = document.getElementById('target');
-      let uid = responsePayload.email;
+     let tag_out = document.getElementById('tag_out');
+     let target = document.getElementById('target');
+     let uid = responsePayload.email;
 
-      //tag person out
+   //tag person out
 
-      async function tag_out_func() {
-        let last_words = document.getElementById('last_words');
-        var ref = doc(db, "data", uid);
-        const docRef = await updateDoc(
-          ref, {
-          alive: false,
-          lastWords: last_words.value
-        }
-        )
-          .then(() => { alert("You have tagged out") })
-          .catch((error) => { console.log(error) })
+     async function tag_out_func(){
+       try{
+         let last_words = document.getElementById('last_words').value;
+         var ref = doc(db, "data", uid);
+         const docRef = await updateDoc(
+           ref, {
+             alive: false,
+             lastWords: last_words
+           }
+         )
+         .then(()=> {alert("You have tagged out")})
+         .catch((error)=> {console.log(error)})
 
-        //info about person tagging out
+       //info about person tagging out
 
-        const docSnap = await getDoc(ref);
-        if (docSnap.exists()) {
-          var chaser = docSnap.data()["chaser"];
-          var chaser_ref = doc(db, "data", chaser);
-          var target = docSnap.data()["target"];
-          var target_ref = doc(db, "data", target);
-          var person_name = docSnap.data()["firstName"] + " " + docSnap.data()["lastName"];
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
+         const docSnap = await getDoc(ref);
+         if (docSnap.exists()) {
+             var chaser = docSnap.data()["chaser"];
+             var chaser_ref = doc(db, "data", chaser);
+             var target = docSnap.data()["target"];
+             var target_ref = doc(db, "data", target);
+             var person_name = docSnap.data()["firstName"] + " " + docSnap.data()["lastName"];
+           } else {
+             // doc.data() will be undefined in this case
+             console.log("No such document!");
+           }
 
-        //info about chaser
-        const chaser_docSnap = await getDoc(chaser_ref);
+     //info about chaser
+           const chaser_docSnap = await getDoc(chaser_ref);
 
-        if (chaser_docSnap.exists()) {
-          var tags = chaser_docSnap.data()["tags"] + 1;
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
+           if (chaser_docSnap.exists()) {
+               var tags = chaser_docSnap.data()["tags"] + 1;
+             } else {
+               // doc.data() will be undefined in this case
+               console.log("No such document!");
+             }
 
-        //change chaser data
-        const chaser_docRef = await updateDoc(
-          chaser_ref, {
-          tags: tags,
-          target: target
-        }
-        )
-          .catch((error) => { console.log(error) })
+     //change chaser data
+           const chaser_docRef = await updateDoc(
+             chaser_ref, {
+               tags: tags,
+               target: target
+             }
+           )
+           .catch((error)=> {console.log(error)})
 
-        //change target data
-        const target_docRef = await updateDoc(
-          target_ref, {
-          chaser: chaser,
-        }
-        )
-          .catch((error) => { console.log(error) })
+     //change target data
+       const target_docRef = await updateDoc(
+         target_ref, {
+           chaser: chaser,
+         }
+       )
+       .catch((error)=> {console.log(error)})
 
-        //add stuff to last words collection
+     //add stuff to last words collection
 
-        var lw_ref = collection(db, "lastWords");
-        const lw_docRef = await addDoc(
-          lw_ref, {
-          Lw: last_words.value,
-          Author: "--" + person_name,
-          TimeStamp: Timestamp.now()
-        }
-        )
-          .catch((error) => { console.log(error) })
+       var lw_ref = collection(db, "lastWords");
+       const lw_docRef = await addDoc(
+         lw_ref, {
+           Lw: last_words,
+           Author: "--" + person_name,
+           TimeStamp: Timestamp.now()
+         }
+       )
+       .catch((error)=> {console.log(error)})
 
-      }
+       $("#hide2").hide();
+       $("#tag_out").hide();
+       $("#tagout-div").hide();
+       
+     }catch(e){
+       alert('please enter last words');
+     }
 
-      async function set_target() {
-        var ref = doc(db, "data", uid);
-        const docSnap = await getDoc(ref);
-        if (docSnap.exists()) {
-          var target = docSnap.data()["target"];
-          var target_ref = doc(db, "data", target);
-          var alive = docSnap.data()["alive"];
-          var person_name = docSnap.data()["firstName"];
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-        const target_docSnap = await getDoc(target_ref);
 
-        if (alive == true) {
+     }
 
-          if (target_docSnap.exists()) {
-            var first = target_docSnap.data()["firstName"] + " ";
-            var last = target_docSnap.data()["lastName"];
+     async function set_target(){
+       var ref = doc(db, "data", uid);
+       const docSnap = await getDoc(ref);
+       if (docSnap.exists()) {
+           var target = docSnap.data()["target"];
+           var target_ref = doc(db, "data", target);
+           var alive = docSnap.data()["alive"];
+           var person_name = docSnap.data()["firstName"];
+         } else {
+           // doc.data() will be undefined in this case
+           console.log("No such document!");
+         }
+         const target_docSnap = await getDoc(target_ref);
 
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-          document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
-          console.log('welcome')
-        } else {
-          document.getElementById('hide2').hidden = true;
-          document.getElementById('hide4').hidden = true;
-          document.getElementById('last_words').hidden = true;
+         if (alive == true){
+
+         if (target_docSnap.exists()) {
+             var first = target_docSnap.data()["firstName"] + " ";
+             var last = target_docSnap.data()["lastName"];
+
+           } else {
+             // doc.data() will be undefined in this case
+             console.log("No such document!");
+           }
+         document.getElementById('target').innerHTML = "<strong> Target: </strong>" + first + last;
+       }else{
+         // add hidden here
+         $("#hide2").hide();
+         $("#tag_out").hide();
+         $("#tagout-div").hide();
         }
         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
 
