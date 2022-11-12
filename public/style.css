@@ -57,6 +57,7 @@ body{
 
 .last_words{
   text-align: center;
+  color: red;
   inline-size: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
