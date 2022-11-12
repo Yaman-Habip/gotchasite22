@@ -60,6 +60,7 @@ body{
   inline-size: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
+  display: block;
 }
 
 .leaderboard-div{
@@ -69,6 +70,7 @@ body{
   padding: 2%;
   width: 50%;
   margin-top: 3%;
+  display: block;
 }
 
 #welcome-div{
