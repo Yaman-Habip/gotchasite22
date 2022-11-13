@@ -98,7 +98,7 @@
 
     import {get_OAUTH_ID} from "/secrets.js";
 
-    oauth_key = get_OAUTH_ID();
+    var oauth_key = get_OAUTH_ID();
 
     window.onload = function () {
       google.accounts.id.initialize({
