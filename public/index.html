@@ -366,7 +366,7 @@
           const lw_docRef = await addDoc(
             lw_ref, {
             Lw: last_words,
-            Author: "--" + person_name,
+            Author: person_name,
             TimeStamp: Timestamp.now()
           }
           )
