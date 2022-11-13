@@ -200,6 +200,8 @@
 
           //update Stats
 
+          let day = new Date().getDay();
+
           const querySnapshot = await getDocs(collection(db, "stats"));
 
           var info = {};
