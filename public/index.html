@@ -181,6 +181,9 @@
 
           if (chaser_docSnap.exists()) {
             var tags = chaser_docSnap.data()["tags"] + 1;
+            var grade = chaser_docSnap.data()["class"];
+            var type = chaser_docSnap.data()["d/b"];
+            let day = new Date().getDay();
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -194,6 +197,158 @@
           }
           )
             .catch((error) => { console.log(error) })
+
+          //update Stats
+
+          const querySnapshot = await getDocs(collection(db, "stats"));
+
+          var info = {};
+
+          querySnapshot.forEach(doc => {
+            info[doc.id] = doc.data()["total"];
+          });
+
+          if (grade == "freshman"){
+            var grade_ref = doc(db, "stats", "IV_Tags");
+            var statsupdates = await updateDoc(
+              grade_ref, {
+              total: info['IV_Tags'] + 1
+              }
+            )
+          }else if (grade == "sophomore"){
+            var grade_ref = doc(db, "stats", "III_Tags");
+            var statsupdates = await updateDoc(
+              grade_ref, {
+              total: info['III_Tags'] + 1
+              }
+            )
+          }else if (grade == "junior"){
+            var grade_ref = doc(db, "stats", "II_Tags");
+            var statsupdates = await updateDoc(
+              grade_ref, {
+              total: info['II_Tags'] + 1
+              }
+            )
+          }else{
+            var grade_ref = doc(db, "stats", "I_Tags");
+            var statsupdates = await updateDoc(
+              grade_ref, {
+              total: info['I_Tags'] + 1
+              }
+            )
+          }
+
+          if (day == 1){
+            var total_ref = doc(db, "stats", "total1");
+            var statsupdates = await updateDoc(
+              total_ref, {
+              total: info['total1'] + 1
+              }
+            )
+            if (type = "boarder"){
+              var type_ref = doc(db, "stats", "boarder1");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['boarder1'] + 1
+                }
+              )
+            }else{
+              var type_ref = doc(db, "stats", "day1");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['day1'] + 1
+                }
+              )
+            }
+          }else if (day == 2){
+            var total_ref = doc(db, "stats", "total2");
+            var statsupdates = await updateDoc(
+              total_ref, {
+              total: info['total2'] + 1
+              }
+            )
+            if (type = "boarder"){
+              var type_ref = doc(db, "stats", "boarder2");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['boarder2'] + 1
+                }
+              )
+            }else{
+              var type_ref = doc(db, "stats", "day2");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['day2'] + 1
+                }
+              )
+            }
+          }else if(day == 3){
+            var total_ref = doc(db, "stats", "total3");
+            var statsupdates = await updateDoc(
+              total_ref, {
+              total: info['total3'] + 1
+              }
+            )
+            if (type = "boarder"){
+              var type_ref = doc(db, "stats", "boarder3");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['boarder3'] + 1
+                }
+              )
+            }else{
+              var type_ref = doc(db, "stats", "day3");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['day3'] + 1
+                }
+              )
+            }
+          }else if (day == 4){
+            var total_ref = doc(db, "stats", "total4");
+            var statsupdates = await updateDoc(
+              total_ref, {
+              total: info['total4'] + 1
+              }
+            )
+            if (type = "boarder"){
+              var type_ref = doc(db, "stats", "boarder4");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['boarder4'] + 1
+                }
+              )
+            }else{
+              var type_ref = doc(db, "stats", "day4");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['day4'] + 1
+                }
+              )
+            }
+          }else{
+            var total_ref = doc(db, "stats", "total5");
+            var statsupdates = await updateDoc(
+              total_ref, {
+              total: info['total5'] + 1
+              }
+            )
+            if (type = "boarder"){
+              var type_ref = doc(db, "stats", "boarder5");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['boarder5'] + 1
+                }
+              )
+            }else{
+              var type_ref = doc(db, "stats", "day5");
+              var statsupdates = await updateDoc(
+                type_ref, {
+                total: info['day5'] + 1
+                }
+              )
+            }
+          }
 
           //change target data
           const target_docRef = await updateDoc(
