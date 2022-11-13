@@ -96,9 +96,10 @@
     import { getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, Timestamp }
       from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
-    import {get_OAUTH_ID} from "/secrets.js";
+    import {get_OAUTH_ID, get_FB_CODE} from "/secrets.js";
 
     var oauth_key = get_OAUTH_ID();
+    var fb_key = get_FB_CODE();
 
     window.onload = function () {
       google.accounts.id.initialize({
@@ -126,7 +127,7 @@
       const responsePayload = parseJwt(response.credential);
 
       const firebaseConfig = {
-        apiKey: "AIzaSyDJcTBXZZcw1hpWAyith3HtPBZRAx7vkvE",
+        apiKey: fb_key,
         authDomain: "gotcha-b4b13.firebaseapp.com",
         databaseURL: "https://gotcha-b4b13-default-rtdb.firebaseio.com",
         projectId: "gotcha-b4b13",
