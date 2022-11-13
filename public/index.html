@@ -399,7 +399,7 @@
           console.log("No such document!");
         }
 
-        document.getElementById('tags').innerHTML = "Tags: " + tag_number;
+        document.getElementById('tags').innerHTML = "<strong> Target: </strong>" + tag_number;
         const target_docSnap = await getDoc(target_ref);
 
         if (alive == true) {
@@ -420,6 +420,7 @@
           $("#tagout-div").hide();
           $('#last_words').hide();
           $('.tagout-div').hide();
+          $('#target').hide();
         }
         document.getElementById('welcome').innerHTML = "Welcome " + person_name;
 
