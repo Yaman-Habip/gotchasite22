@@ -399,7 +399,7 @@
           console.log("No such document!");
         }
 
-        document.getElementById('tags').innerHTML = "<strong> Target: </strong>" + tag_number;
+        document.getElementById('tags').innerHTML = "<strong> Tags: </strong>" + tag_number;
         const target_docSnap = await getDoc(target_ref);
 
         if (alive == true) {
