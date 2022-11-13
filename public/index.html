@@ -96,11 +96,13 @@
     import { getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, Timestamp }
       from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
-    import {OAUTH_ID} from "/secrets.js";
+    import {get_OAUTH_ID} from "/secrets.js";
+
+    oauth_key = get_OAUTH_ID();
 
     window.onload = function () {
       google.accounts.id.initialize({
-        client_id: OAUTH_ID,
+        client_id: oauth_key,
         callback: handleCredentialResponse
       });
       google.accounts.id.renderButton(
