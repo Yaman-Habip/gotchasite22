@@ -52,8 +52,14 @@ body{
   background:rgb(59, 59, 59);
   padding: 2%;
   width: auto;
-  max-height: 45%;
+  height: 35%;
+  position: relative;
+  overflow: auto;
 }
+
+.table-wrapper-scroll-y {
+  display: block;
+  }
 
 .last_words{
   text-align: center;
