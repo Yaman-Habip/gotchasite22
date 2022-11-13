@@ -1,3 +1,7 @@
+*{
+  font-family: American Typewriter;
+}
+
 body{
   /* background-image: url("images/redacted.jpg"); */
   background-color: rgb(36, 36, 36);
@@ -63,11 +67,16 @@ body{
 
 .last_words{
   text-align: center;
-  color: red;
   inline-size: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
   display: block;
+}
+
+.lastwords-table-spec{
+  height: 35%;
+  position: relative;
+  overflow: auto;
 }
 
 .leaderboard-div{
@@ -78,6 +87,10 @@ body{
   width: 50%;
   margin-top: 3%;
   display: block;
+}
+
+.table{
+  color: rgb(168, 167, 167);
 }
 
 #welcome-div{
@@ -91,5 +104,5 @@ body{
 
 .credits{
   text-align: center;
-  color: red;
+  color: rgb(243, 126, 126);
 }
