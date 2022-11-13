@@ -232,10 +232,13 @@
           var target_ref = doc(db, "data", target);
           var alive = docSnap.data()["alive"];
           var person_name = docSnap.data()["firstName"];
+          var tag_number = docSnap.data()["tags"];
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
         }
+
+        document.getElementById('tags').innerHTML = "Tags: " + tag_number;
         const target_docSnap = await getDoc(target_ref);
 
         if (alive == true) {
@@ -297,11 +300,13 @@
         var leaders = [];
 
         querySnapshot.forEach(doc => {
+          if (doc.data()["alive"]){
           leaders.push({
             firstName: doc.data()["firstName"],
             lastName: doc.data()["lastName"],
             tags: doc.data()["tags"]
-          })
+            })
+          }
         });
 
         leaders.sort(function (a, b) { return b.tags - a.tags });
