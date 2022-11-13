@@ -5,7 +5,7 @@
 body{
   /* background-image: url("images/redacted.jpg"); */
   background-color: rgb(36, 36, 36);
-  /* margin-left: 50%; */
+  margin: 3%;
 }
 
 .main-div{
@@ -57,20 +57,24 @@ body{
   padding: 2%;
   width: auto;
   height: 35%;
-  position: relative;
-  overflow: auto;
 }
 
 .table-wrapper-scroll-y {
   display: block;
   }
 
-.last_words{
+.last_words{ /* FOR STYLIING */
   text-align: center;
   inline-size: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
   display: block;
+}
+
+.called-lastwords-table{
+  display: block;
+  height: 200px;
+  overflow-y: scroll;
 }
 
 .lastwords-table-spec{
