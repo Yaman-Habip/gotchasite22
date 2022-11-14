@@ -111,3 +111,9 @@ body{
   text-align: center;
   color: rgb(243, 126, 126);
 }
+
+.memes_div{
+  text-align: center;
+  width: 50%;
+  margin-top: 3%;
+}
