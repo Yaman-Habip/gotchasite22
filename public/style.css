@@ -117,3 +117,13 @@ body{
   width: 50%;
   margin-top: 3%;
 }
+
+.meme-title{
+  color: lightgrey;
+}
+
+img{
+  width:50%;
+  height: 50%;
+  border-radius: 25px;
+}
