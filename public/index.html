@@ -165,6 +165,7 @@
       //tag person out
 
       async function tag_out_func() {
+        tag_out.removeEventListener('click', tag_out_func);
         try {
           let last_words = document.getElementById('last_words').value;
           var ref = doc(db, "data", uid);
